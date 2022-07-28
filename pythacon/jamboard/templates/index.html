@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
 </head>
 <body>
-    <script>
-        let url=`ws://${window.location.host}/ws/socket-server`;
+    <script type="text/javascript">
+        let url=`ws://${window.location.host}/ws/`;
         const chatSocket=new WebSocket(url);
-
-        chatSocket.onmessage=function(e){
-            let data=JSON.parse(e.data);
-            console.log(data);
-        }
     </script>
+    <script src="{% static 'js/sketch.js' %}"></script>
 </body>
 </html>
