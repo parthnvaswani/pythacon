@@ -1,18 +1,68 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
-</head>
-<body>
+  </head>
+  <body>
+    <nav>
+      <div>Chalk And Duster</div>
+      <ul>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div>
+        <div id="sketch"></div>
+        <div class="editor">
+          <div></div>
+        </div>
+      </div>
+      <div class="chat">
+        <div class="messages">
+          <div class="message">
+            <div class="user">
+              <div class="name">
+                <span>John Doe</span>
+                <span>12:00</span>
+              </div>
+              <div class="content">
+                <p class="fullmsg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque minima voluptate vitae quasi architecto ea ad officia sapiente laudantium recusandae optio sequi excepturi voluptates, enim error perferendis ut quos nam!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="input">
+          <input type="text" />
+          <button>Send</button>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript">
-        let url=`ws://${window.location.host}/ws/`;
-        const chatSocket=new WebSocket(url);
+      let url = `ws://${window.location.host}/ws/`;
+      const chatSocket = new WebSocket(url);
+
+      let editor = document.querySelector(".editor");
+      let sketch = document.querySelector("#sketch");
+      let nav = document.querySelector("nav");
+      let timeout;
+      let notResizing = true;
+      new ResizeObserver(() => {
+        let setHeight = window.innerHeight - sketch.offsetHeight - nav.offsetHeight;
+        if (!isNaN(setHeight)) editor.style.height = setHeight + "px";
+        notResizing = false;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          notResizing = true;
+        }, 100);
+      }).observe(sketch);
     </script>
     <script src="{% static 'js/sketch.js' %}"></script>
-</body>
+  </body>
 </html>
