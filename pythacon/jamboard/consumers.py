@@ -2,6 +2,8 @@ import json
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 
+cood={'type':'init','data':[]}
+
 class SketchConsumer(WebsocketConsumer):
     def connect(self):
         self.room_group_name = 'sketch'
@@ -13,7 +15,10 @@ class SketchConsumer(WebsocketConsumer):
 
         self.accept()
 
+        self.send(text_data=json.dumps(cood))
+
     def receive(self, text_data):
+        cood['data'].append(json.loads(text_data))
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             {

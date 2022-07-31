@@ -6,7 +6,8 @@ function setup() {
   c.elt.addEventListener('mouseenter', ()=> {isOnCanvas=true;});
   chatSocket.onmessage = function (e) {
     let data = JSON.parse(e.data);
-    if (data.type == "draw") serverDraw(JSON.parse(e.data));
+    if(data.type=="init") data.data.forEach(serverDraw);
+    if (data.type == "draw") serverDraw(data);
   };
 }
 
