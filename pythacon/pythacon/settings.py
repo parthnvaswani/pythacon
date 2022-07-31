@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 ASGI_APPLICATION='pythacon.asgi.application'
+WSGI_APPLICATION='pythacon.wsgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
