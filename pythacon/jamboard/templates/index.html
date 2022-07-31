@@ -26,17 +26,6 @@
       </div>
       <div class="chat">
         <div class="messages">
-          <div class="message">
-            <div class="user">
-              <div class="name">
-                <span>John Doe</span>
-                <span>12:00</span>
-              </div>
-              <div class="content">
-                <p class="fullmsg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque minima voluptate vitae quasi architecto ea ad officia sapiente laudantium recusandae optio sequi excepturi voluptates, enim error perferendis ut quos nam!</p>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="input">
           <input type="text" />
@@ -47,6 +36,17 @@
     <script type="text/javascript">
       let url = `ws://${window.location.host}/ws/`;
       const chatSocket = new WebSocket(url);
+      
+      chatSocket.onmessage = function (e) {
+        let data = JSON.parse(e.data);
+        console.log(data);
+        if(data.type=="init") {
+          data.cood.forEach(serverDraw);
+          data.chat.forEach(addMessage);
+        }
+        if (data.type == "draw") serverDraw(data);
+        if (data.type == "chat") addMessage(data);
+      }
 
       let editor = document.querySelector(".editor");
       let sketch = document.querySelector("#sketch");
@@ -62,7 +62,9 @@
           notResizing = true;
         }, 100);
       }).observe(sketch);
+    
     </script>
     <script src="{% static 'js/sketch.js' %}"></script>
+    <script src="{% static 'js/chat.js' %}"></script>
   </body>
 </html>
