@@ -19,16 +19,6 @@ function draw() {
       y = mouseY;
     stroke(0);
     line(px, py, x, y);
-  }
-}
-
-function serverDraw(data) {
-  stroke(0);
-  line(data.px, data.py, data.x, data.y);
-}
-
-function mouseDragged() {
-  if(isOnCanvas && notResizing)
     chatSocket.send(
       JSON.stringify({
         type: "draw",
@@ -38,4 +28,10 @@ function mouseDragged() {
         y: mouseY,
       })
     );
+  }
+}
+
+function serverDraw(data) {
+  stroke(0);
+  line(data.px, data.py, data.x, data.y);
 }
