@@ -5,66 +5,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>{% block title %}{% endblock %} Chalk & Duster</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   </head>
   <body>
     <nav>
       <div>Chalk And Duster</div>
       <ul>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
+        {% if request.user.is_authenticated%}
+        <li>UserName</li>
+        <li><a href="/logout/">Logout</a></li>
+        {% else %}
+        <li><a href="/login/">Login</a></li>
+        <li><a href="/signup/">Sign up</a></li>
+        {%endif%}
       </ul>
     </nav>
-    <div class="container">
-      <div>
-        <div id="sketch"></div>
-        <div class="editor">
-          <div></div>
-        </div>
-      </div>
-      <div class="chat">
-        <div class="messages">
-        </div>
-        <div class="input">
-          <input type="text" />
-          <button>Send</button>
-        </div>
-      </div>
-    </div>
-    <script type="text/javascript">
-      let url = `ws://${window.location.host}/ws/`;
-      const chatSocket = new WebSocket(url);
-      
-      chatSocket.onmessage = function (e) {
-        let data = JSON.parse(e.data);
-        console.log(data);
-        if(data.type=="init") {
-          data.cood.forEach(serverDraw);
-          data.chat.forEach(addMessage);
-        }
-        if (data.type == "draw") serverDraw(data);
-        if (data.type == "chat") addMessage(data);
-      }
-
-      let editor = document.querySelector(".editor");
-      let sketch = document.querySelector("#sketch");
-      let nav = document.querySelector("nav");
-      let timeout;
-      let notResizing = true;
-      new ResizeObserver(() => {
-        let setHeight = window.innerHeight - sketch.offsetHeight - nav.offsetHeight;
-        if (!isNaN(setHeight)) editor.style.height = setHeight + "px";
-        notResizing = false;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          notResizing = true;
-        }, 100);
-      }).observe(sketch);
+    {% block content %}
+    {% endblock %}
     
-    </script>
-    <script src="{% static 'js/sketch.js' %}"></script>
-    <script src="{% static 'js/chat.js' %}"></script>
+    
+    <!-- <script src="{% static 'js/sketch.js' %}"></script> -->
+    
   </body>
 </html>

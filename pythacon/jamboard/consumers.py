@@ -19,7 +19,6 @@ class SketchConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         rdata=json.loads(text_data)
-        print(rdata)
         if(rdata['type']=='draw'):
             data['cood'].append(rdata)
             async_to_sync(self.channel_layer.group_send)(
