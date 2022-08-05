@@ -2,7 +2,7 @@ let isOnCanvas = false;
 let colors = ["black", "red", "yellow", "blue", "green", "white"],
   idc = 0;
 let weight = 1;
-let init=true;
+let initvar=true;
 
 function setup() {
   let c = createCanvas(700, 700);
@@ -16,9 +16,9 @@ function setup() {
 }
 
 function draw() {
-  if(init && cood){
+  if(initvar && cood){
     cood.forEach(serverDraw);
-    init=false;
+    initvar=false;
   }
   if (mouseIsPressed && isOnCanvas && notResizing) {
     let px = pmouseX,
