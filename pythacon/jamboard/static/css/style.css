@@ -1,7 +1,5 @@
 * {
   margin: 0;
-  font-size: 100%;
-  font: inherit;
 }
 
 *,
@@ -10,8 +8,8 @@
   box-sizing: border-box;
 }
 
-body{
-    overflow: hidden;
+body {
+  overflow: hidden;
 }
 
 nav {
@@ -38,76 +36,127 @@ nav ul a:hover {
   color: black;
 }
 
-.container{
-    display: flex;
+.container {
+  display: flex;
 }
 
-canvas{
-    width: 80vw !important;
+canvas {
+  width: 80vw !important;
 }
 
-#sketch{
-    resize: vertical;
-    overflow: hidden scroll;
-    width: fit-content;
-    min-height: 10vh;
-    height: 80vh;
-    max-height: 80vh;
-    border-bottom: 1px solid;
+.panel {
+  height: 80vw;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 5px;
 }
 
-.editor{
-    background-color: violet;
-    overflow: hidden scroll;
-    height: 12vh;
+#sketch {
+  resize: vertical;
+  overflow: hidden scroll;
+  width: fit-content;
+  min-height: 10vh;
+  height: 50vh;
+  max-height: 80vh;
+  border-bottom: 1px solid;
 }
 
-.editor div{
-    width: 80vw;
-    min-height: 85vh;
+.editor {
+  height: 12vh;
 }
 
-.chat{
-    background-color: lightblue;
-    width:20vw;
-    height: 95vh;
-    padding: 25px 0px;
-    display: flex;
-    flex-direction: column;
+.chat {
+  background-color: lightblue;
+  width: 20vw;
+  height: 95vh;
+  padding: 25px 0px;
+  display: flex;
+  flex-direction: column;
 }
 
-.chat .input{
-    padding: 0px 5px;
-    margin-top: auto;
+.chat .input {
+  padding: 0px 5px;
+  margin-top: auto;
 }
 
-.chat .messages{
-    overflow: hidden scroll;
-    height: 85vh;
-    padding: 0px 5px;
+.chat .messages {
+  overflow: hidden scroll;
+  height: 85vh;
+  padding: 0px 5px;
 }
 
-.chat .message{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 10px;
-    background: rgb(194, 192, 192);
-    border-radius: 20px;
-    padding: 10px;
+.chat .message {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  background: rgb(194, 192, 192);
+  border-radius: 20px;
+  padding: 10px;
 }
 
-.chat .user{
-    width: 100%;
+.chat .user {
+  width: 100%;
 }
 
-.chat .name span:last-of-type{
+.chat .name span:last-of-type {
   float: right;
 }
 
-.chat .content{
-    width: 100%;
-    padding-top: 10px;
+.chat .content {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.ace_print-margin {
+  display: none;
+}
+
+.control-panel {
+  background: lightgray;
+  display: flex;
+  gap: 15px;
+  padding: 4px;
+  font-family: sans-serif;
+}
+
+.theme-select {
+  margin-left: auto;
+}
+
+.languages,
+.themes {
+  background: white;
+  border: 1px solid gray;
+}
+
+#editor {
+  height: 100%;
+  width: 100%;
+}
+
+.button-container {
+  text-align: right;
+  padding: 4px;
+}
+
+.btn {
+  background: #57a958;
+  color: white;
+  padding: 8px;
+  border: 0;
+}
+
+.output {
+  padding: 4px;
+  border: 2px solid gray;
+  min-height: 100px;
+  width: 99%;
+  resize: none;
 }
 
 /* Sign up form */
@@ -144,7 +193,7 @@ canvas{
   background: #fff;
   border: 1px solid #dbdbdb;
   font-size: 1.6em;
-  padding: .8em .5em;
+  padding: 0.8em 0.5em;
   border-radius: 2px;
 }
 #signupfrom input[type="text"]:focus,
@@ -153,7 +202,7 @@ canvas{
 }
 #signupfrom span {
   display: block;
-  background: #F9A5A5;
+  background: #f9a5a5;
   padding: 2px 5px;
   color: #666;
 }
@@ -170,8 +219,8 @@ canvas{
   line-height: 1.6em;
   margin: 2em 0 0;
   outline: none;
-  padding: .8em 0;
-  text-shadow: 0 1px #68B25B;
+  padding: 0.8em 0;
+  text-shadow: 0 1px #68b25b;
 }
 #signupfrom button:hover {
   background: #94af65;

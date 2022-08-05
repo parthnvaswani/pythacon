@@ -1,56 +1,96 @@
 {% extends 'index.html' %}
-
 {% block title %}Home | {% endblock %}
-
 {% block content %}
 
 <div class="container">
-    <div>
-      <div id="sketch"></div>
-      <div class="editor">
-        <div></div>
+  <div>
+    <div id="sketch"></div>
+    <div class="editor">
+      <div class="control-panel">
+        Code Editor
+        <div class="theme-select">
+          Select Theme: &nbsp; &nbsp;
+          <select id="themes" class="themes" onchange="changeTheme()">
+            <option value="monokai">Dark</option>
+            <option value="chrome">Light</option>
+          </select>
+        </div>
+        <div class="language-select">
+          Select Language: &nbsp; &nbsp;
+          <select id="languages" class="languages" onchange="changeLanguage()">
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="java">Java</option>
+            <option value="python">Python</option>
+            <option value="node">Node JS</option>
+          </select>
+        </div>
       </div>
+      <div id="editor"></div>
     </div>
-    <div class="chat">
-      <div class="messages">
-      </div>
-      <div class="input">
-        <input type="text" />
-        <button>Send</button>
-      </div>
+  </div>
+  <div class="chat">
+    <div class="messages"></div>
+    <div class="input">
+      <input type="text" />
+      <button>Send</button>
     </div>
+  </div>
+  <div class="panel">
+    <button style="background-color:black;width: 12px;height: 12px;" onclick="changeColor('black')"></button>
+    <button style="background-color:red;width: 12px;height: 12px;" onclick="changeColor('red')"></button>
+    <button style="background-color:yellow;width: 12px;height: 12px;" onclick="changeColor('yellow')"></button>
+    <button style="background-color:blue;width: 12px;height: 12px;" onclick="changeColor('blue')"></button>
+    <button style="background-color:green;width: 12px;height: 12px;" onclick="changeColor('green')"></button>
+    <button style="background-color:white;width: 12px;height: 12px;" onclick="changeColor('white')"></button>
+    <button class="clear" onclick="clearCan()">clear</button>
+    <select id="weights" class="weights" onchange="changeWeight()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+  </div>
 </div>
 <script type="text/javascript">
-    let url = `ws://${window.location.host}/ws/`;
-    const chatSocket = new WebSocket(url);
-    
-    chatSocket.onmessage = function (e) {
-      let data = JSON.parse(e.data);
-      console.log(data);
-      if(data.type=="init") {
-        data.cood.forEach(serverDraw);
-        data.chat.forEach(addMessage);
-      }
-      if (data.type == "draw") serverDraw(data);
-      if (data.type == "chat") addMessage(data);
+  let url = `ws://${window.location.host}/ws/`;
+  const chatSocket = new WebSocket(url);
+  let cood;
+  chatSocket.onmessage = function (e) {
+    let data = JSON.parse(e.data);
+    if (data.type == "init") {
+      cood=data.cood;
+      data.chat.forEach(addMessage);
+      editText(data.text);
     }
+    if (data.type == "draw") serverDraw(data);
+    if (data.type == "chat") addMessage(data);
+    if (data.type == "edit") editText(data);
+    if (data.type == "lang-change") changeLang(data);
+    if (data.type == "clear") clearC();
+  };
 
-    let editor = document.querySelector(".editor");
-    let sketch = document.querySelector("#sketch");
-    let nav = document.querySelector("nav");
-    let timeout;
-    let notResizing = true;
-    new ResizeObserver(() => {
-      let setHeight = window.innerHeight - sketch.offsetHeight - nav.offsetHeight;
-      if (!isNaN(setHeight)) editor.style.height = setHeight + "px";
-      notResizing = false;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        notResizing = true;
-      }, 100);
-    }).observe(sketch);
-  
+  let editorC = document.querySelector(".editor");
+  let sketch = document.querySelector("#sketch");
+  let nav = document.querySelector("nav");
+  let timeout;
+  let notResizing = true;
+  new ResizeObserver(() => {
+    let setHeight = window.innerHeight - sketch.offsetHeight - nav.offsetHeight;
+    if (!isNaN(setHeight)) {
+      editorC.style.height = setHeight + "px";
+    }
+    notResizing = false;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      notResizing = true;
+    }, 100);
+  }).observe(sketch);
 </script>
 <script src="static/js/sketch.js"></script>
 <script src="static/js/chat.js"></script>
+<script src="static/js/lib/ace.js"></script>
+<script src="static/js/lib/theme-monokai.js"></script>
+<script src="static/js/editor.js"></script>
 {% endblock %}
