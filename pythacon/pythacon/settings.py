@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jamboard'
+    'jamboard',
+    'room'
 ]
 
 ASGI_APPLICATION='pythacon.asgi.application'
