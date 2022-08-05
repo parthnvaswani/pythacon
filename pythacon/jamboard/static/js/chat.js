@@ -29,7 +29,7 @@ function addMessage(data) {
   message.classList.add("message");
   message.innerHTML = `<div class="user">
     <div class="name">
-      <span style="color:black ;font-weight : bold">${data.user}</span>
+      <span style="color:black ;font-weight : bold">${data.user||username}</span>
       <span style="color:black ;font-weight : bold">${data.time}</span>
     </div>
     <div class="content">

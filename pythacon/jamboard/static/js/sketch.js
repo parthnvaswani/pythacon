@@ -2,6 +2,7 @@ let isOnCanvas = false;
 let colors = ["black", "red", "yellow", "blue", "green", "white"],
   idc = 0;
 let weight = 1;
+let init=true;
 
 function setup() {
   let c = createCanvas(700, 700);
@@ -12,10 +13,13 @@ function setup() {
   c.elt.addEventListener("mouseenter", () => {
     isOnCanvas = true;
   });
-  cood.forEach(serverDraw);
 }
 
 function draw() {
+  if(init && cood){
+    cood.forEach(serverDraw);
+    init=false;
+  }
   if (mouseIsPressed && isOnCanvas && notResizing) {
     let px = pmouseX,
       py = pmouseY,
