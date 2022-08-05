@@ -49,3 +49,10 @@ function changeTheme() {
 function editText(data) {
   editor.setValue(data.data||'');
 }
+
+function changeSize() {
+  let size = document.querySelector("#sizes").value;
+  editor.setOptions({
+    fontSize: `${size}pt`
+  });
+}
