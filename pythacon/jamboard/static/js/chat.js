@@ -29,11 +29,11 @@ function addMessage(data) {
   message.classList.add("message");
   message.innerHTML = `<div class="user">
     <div class="name">
-      <span>John Doe</span>
-      <span>${data.time}</span>
+      <span style="color:black ;font-weight : bold">${data.user}</span>
+      <span style="color:black ;font-weight : bold">${data.time}</span>
     </div>
     <div class="content">
-      <p class="fullmsg">${data.message}</p>
+      <p class="fullmsg" style="color:white ;">${data.message}</p>
     </div>
   </div>`;
   document.querySelector(".messages").appendChild(message);

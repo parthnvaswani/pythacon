@@ -4,101 +4,81 @@
 
 {% block content %}
 
-    <form method="post" action="." id="signupfrom">
-        {% csrf_token %}
-    <h2>Sign Up</h2>
-            <p>
-                <label for="UserName" class="floatLabel">UserName</label>
-                <input id="UserName" name="username" type="text">
-            </p>
-            <p>
-                <label for="Email" class="floatLabel">Email</label>
-                <input id="Email" name="email" type="text">
-            </p>
-            <p>
-                <label for="password" class="floatLabel">Password</label>
-                <input id="password" name="password1" type="password">
-                <span>Enter a password longer than 8 characters</span>
-            </p>
-            <p>
-                <label for="confirm_password" class="floatLabel">Confirm Password</label>
-                <input id="confirm_password" name="password2" type="password">
-                <span>Your passwords do not match</span>
-            </p>
-            {% if form.errors %}
+<body class="body">
+    <div class="main-form">
+        <div class="form">
+            <h2>SIGN UP</h2>
+            <form method="POST" action="" class="form1">
+                {% csrf_token %}
+                <div class="email">
+                    <div class="icon">
+                        <span class="fa fa-user"></span>
+                    </div>
+                    <div class="text">
+                        <input type="text" placeholder="Enter Your Username" id="UserName" name="username" required>
+                    </div>
+                </div>
+
+                <div class="email">
+                    <div class="icon">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="text">
+                        <input type="text" placeholder="Enter Your Email" id="Email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="email">
+                    <div class="icon">
+                        <span class="fa fa-lock"></span>
+                    </div>
+                    <div class="text">
+                        <input type="password" placeholder="Enter Your Password" id="password" name="password1"
+                            required>
+                    </div>
+                </div>
+                <div class="forgot" style="color: #003a6c; font-size: 15px;font-family: 'Open Sans', sans-serif;">
+                    <input type="checkbox" onclick="myFunction('password')"><b style="padding-left: 5px;">Show
+                        Password</b></input>
+                </div>
+                <div class="email">
+                    <div class="icon">
+                        <span class="fa fa-lock"></span>
+                    </div>
+                    <div class="text">
+                        <input type="password" placeholder="Confirm Password" id="confirm_password" name="password2"
+                            value="" required>
+
+                    </div>
+                </div>
+                <div class="forgot" style="color: #003a6c; font-size: 15px;font-family: 'Open Sans', sans-serif;">
+                    <input type="checkbox" onclick="myFunction('confirm_password')"><b style="padding-left: 5px;">Show
+                        Password</b></input>
+                </div>
+
+                {% if form.errors %}
                 {% for field in form %}
-                    {% for error in field.errors %}
-                        <p class="error">{{ error|escape }}</p>
-                    {% endfor %}
+                {% for error in field.errors %}
+                <p class="error">{{ error|escape }}</p>
                 {% endfor %}
-            {%endif%}
-            <p>
-                <button >Sign up</button>
-            </p>
-      </form>
-      
-      <script type="text/javascript">
-        //Problem: Hints are shown even when form is valid
-        // //Solution: Hide and show them at appropriate times
-        // var $password = $("#password");
-        // var $confirmPassword = $("#confirm_password");
+                {% endfor %}
+                {%endif%}
+                <button class="btn">Submit</button>
 
-        // //Hide hints
-        // $("form span").hide();
+            </form>
+        </div>
+    </div>
 
-        // function isPasswordValid() {
-        // return $password.val().length > 8;
-        // }
-
-        // function arePasswordsMatching() {
-        // return $password.val() === $confirmPassword.val();
-        // }
-
-        // function canSubmit() {
-        // return isPasswordValid() && arePasswordsMatching();
-        // }
-
-        // function passwordEvent() {
-        // //Find out if password is valid
-        // if (isPasswordValid()) {
-        //     //Hide hint if valid
-        //     $password.next().hide();
-        // } else {
-        //     //else show hint
-        //     $password.next().show();
-        // }
-        // }
-
-        // function confirmPasswordEvent() {
-        // //Find out if password and confirmation match
-        // if (arePasswordsMatching()) {
-        //     //Hide hint if match
-        //     $confirmPassword.next().hide();
-        // } else {
-        //     //else show hint
-        //     $confirmPassword.next().show();
-        // }
-        // }
-
-        // function enableSubmitEvent() {
-        // $("#submit").prop("disabled", !canSubmit());
-        // }
-
-        // //When event happens on password input
-        // $password
-        // .focus(passwordEvent)
-        // .keyup(passwordEvent)
-        // .keyup(confirmPasswordEvent)
-        // .keyup(enableSubmitEvent);
-
-        // //When event happens on confirmation input
-        // $confirmPassword
-        // .focus(confirmPasswordEvent)
-        // .keyup(confirmPasswordEvent)
-        // .keyup(enableSubmitEvent);
-
-        // enableSubmitEvent();
-
-      </script>
+</body>
+<script>
+    function myFunction(str1) {
+        var x = document.getElementById(str1);
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
 {% endblock %}

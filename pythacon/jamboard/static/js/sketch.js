@@ -4,7 +4,7 @@ let colors = ["black", "red", "yellow", "blue", "green", "white"],
 let weight = 1;
 
 function setup() {
-  let c = createCanvas(600, 600);
+  let c = createCanvas(700, 700);
   c.parent("sketch");
   c.elt.addEventListener("mouseleave", () => {
     isOnCanvas = false;

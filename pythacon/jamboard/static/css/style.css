@@ -27,12 +27,12 @@ nav ul {
   gap: 20px;
 }
 
-nav ul a {
+a {
   color: white;
   text-decoration: none;
 }
 
-nav ul a:hover {
+a:hover {
   color: black;
 }
 
@@ -70,7 +70,7 @@ canvas {
 }
 
 .chat {
-  background-color: lightblue;
+  background-color: #3b3939;
   width: 20vw;
   height: 95vh;
   padding: 25px 0px;
@@ -94,7 +94,7 @@ canvas {
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
-  background: rgb(194, 192, 192);
+  background: rgb(74 146 70);
   border-radius: 20px;
   padding: 10px;
 }
@@ -110,6 +110,15 @@ canvas {
 .chat .content {
   width: 100%;
   padding-top: 10px;
+}
+
+.sendbtn{
+  background-color: #6c6b6bf7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .ace_print-margin {
@@ -161,88 +170,235 @@ canvas {
 
 /* Sign up form */
 
-#signupfrom {
-  background: #fff;
-  padding: 4em 4em 2em;
-  max-width: 400px;
-  margin: 50px auto 0;
-  box-shadow: 0 0 1em #222;
-  border-radius: 2px;
+.body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
 }
-#signupfrom h2 {
-  margin: 0 0 50px 0;
-  padding: 10px;
+
+.main-form {
+  width: 100%;
+  display: inline-block;
+  margin-top: 37px;
+}
+
+.form {
+  width: 36%;
+  margin: 0px auto;
   text-align: center;
-  font-size: 30px;
-  color: #666666;
-  border-bottom: solid 1px #e5e5e5;
+  box-shadow: 0px 0px 6px black;
 }
-#signupfrom p {
-  margin: 0 0 3em 0;
+
+.form h2 {
+  display: block;
+  padding: 10px 20px;
+  text-align: center;
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.form1 {
+  padding: 50px;
+}
+
+.form2 {
+  padding: 10px 50px 0px;
+}
+
+.email {
+  display: flex;
+  margin-top: 30px;
   position: relative;
 }
-#signupfrom input {
-  display: block;
+
+.icon {
+  font-size: 20px;
+  width: 15%;
+  height: 46px;
+  line-height: 44px;
+  padding: 0px 10px;
+  background-color: cornflowerblue;
+  color: white;
+  z-index: 1;
+}
+
+.text {
+  width: 90%;
+}
+
+.text input {
+  width: 100%;
+  height: 46px;
+  padding: 10px 20px;
+  border: 1px solid grey;
+  border-left: transparent;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: white;
   box-sizing: border-box;
-  width: 100%;
+}
+
+.email input:focus {
   outline: none;
-  margin: 0;
 }
-#signupfrom input[type="text"],
-#signupfrom input[type="password"] {
-  background: #fff;
-  border: 1px solid #dbdbdb;
-  font-size: 1.6em;
-  padding: 0.8em 0.5em;
-  border-radius: 2px;
-}
-#signupfrom input[type="text"]:focus,
-#signupfrom input[type="password"]:focus {
-  background: #fff;
-}
-#signupfrom span {
-  display: block;
-  background: #f9a5a5;
-  padding: 2px 5px;
-  color: #666;
-}
-#signupfrom button {
+
+.text textarea {
   width: 100%;
-  background: rgba(148, 186, 101, 0.7);
-  box-shadow: 0 3px 0 0 rgba(123, 163, 73, 0.7);
-  border-radius: 2px;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  font-size: 2em;
-  line-height: 1.6em;
-  margin: 2em 0 0;
+  height: 46px;
+  padding: 10px 20px;
+  border: 1px solid grey;
+  border-left: transparent;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.email textarea:focus {
   outline: none;
-  padding: 0.8em 0;
-  text-shadow: 0 1px #68b25b;
 }
-#signupfrom button:hover {
-  background: #94af65;
-  text-shadow: 0 1px 3px rgba(70, 93, 41, 0.7);
-}
-#signupfrom label {
-  position: absolute;
-  left: 8px;
-  top: 12px;
-  color: #999;
-  font-size: 16px;
+
+.forgot {
+  width: 100%;
+  margin: 14px auto;
+  text-align: right;
   display: inline-block;
-  padding: 4px 10px;
-  font-weight: 400;
-  background-color: rgba(255, 255, 255, 0);
-  -moz-transition: color 0.3s, top 0.3s, background-color 0.8s;
-  -o-transition: color 0.3s, top 0.3s, background-color 0.8s;
-  -webkit-transition: color 0.3s, top 0.3s, background-color 0.8s;
-  transition: color 0.3s, top 0.3s, background-color 0.8s;
 }
-#signupfrom label.floatLabel {
-  top: -11px;
-  background-color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
+
+.forgot a {
+  color: black;
+  font-weight: 600;
+}
+
+.btn {
+  display: block;
+  padding: 13px 20px;
+  background-color: cornflowerblue;
+  border: transparent;
+  width: 33%;
+  color: white;
+  font-size: 18px;
+  margin: 0px auto;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.get {
+  margin-top: 40px;
+}
+
+.get p a {
+  color: #1691d4;
+  font-weight: 700;
+  margin-bottom: 50px;
+  display: inline-block;
+}
+
+.alert {
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1260px) {
+  .form {
+    width: 51%;
+  }
+
+  .form h2 {
+    font-size: 32px;
+  }
+
+  .email {
+    margin-top: 35px;
+  }
+
+  .forgot {
+    margin: 24px auto;
+  }
+
+  .forgot a {
+    font-size: 17px;
+  }
+
+  .btn {
+    width: 36%;
+  }
+
+  .btn a {
+    font-size: 25px;
+  }
+
+  .option p {
+    font-size: 21px;
+  }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .form {
+    width: 70%;
+  }
+
+  .form h2 {
+    font-size: 26px;
+  }
+
+  .email {
+    margin-top: 35px;
+  }
+
+  .forgot {
+    margin: 24px auto;
+  }
+
+  .forgot a {
+    font-size: 18px;
+  }
+
+  .btn {
+    width: 36%;
+  }
+
+  .btn a {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .form {
+    width: 88%;
+  }
+
+  .btn {
+    width: 55%;
+  }
+
+  .form h2 {
+    font-size: 20px;
+  }
+
+  .form1 {
+    padding: 25px;
+  }
+
+  .icon {
+    width: 10%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .form h2 {
+    font-size: 18px;
+  }
+
+  .text input {
+    padding: 10px;
+  }
+
+  .btn {
+    width: 72%;
+  }
 }

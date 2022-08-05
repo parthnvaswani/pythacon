@@ -30,12 +30,13 @@ class SketchConsumer(WebsocketConsumer):
                 }
             )
         if(rdata['type']=='chat'):
+            rdata['user'] = self.scope['user'].username
             data['chat'].append(rdata)
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
                     'type': 'chat_message',
-                    'data': text_data,
+                    'data': json.dumps(rdata),
                     'user': self.scope["user"]
                 }
             )
