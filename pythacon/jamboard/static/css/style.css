@@ -94,7 +94,7 @@ canvas {
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
-  background: rgb(74 146 70);
+  background: cornflowerblue;
   border-radius: 20px;
   padding: 10px;
 }
