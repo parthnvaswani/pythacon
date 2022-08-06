@@ -139,7 +139,12 @@ canvas {
   padding-top: 10px;
 }
 
-.sendbtn {
+.panel button,.panel select{
+  width: 100% ;
+  height: 25px;
+}
+
+.sendbtn,.clear {
   background-color: #6c6b6bf7;
   color: white;
   border: none;
