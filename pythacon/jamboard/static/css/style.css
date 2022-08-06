@@ -12,6 +12,19 @@ body {
   overflow: hidden;
 }
 
+*::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
 .leave {
   position: fixed;
   bottom: 0;
@@ -133,6 +146,14 @@ canvas {
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+.typemsg{
+   border: 1px solid grey;
+   border-radius: 6px;
+   background: none;
+   height:30px;
+   color: white;
 }
 
 .ace_print-margin {
