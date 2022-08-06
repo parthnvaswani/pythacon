@@ -12,6 +12,20 @@ body {
   overflow: hidden;
 }
 
+.leave {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: white;
+}
+
+.leave:hover{
+  cursor: pointer;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -112,7 +126,7 @@ canvas {
   padding-top: 10px;
 }
 
-.sendbtn{
+.sendbtn {
   background-color: #6c6b6bf7;
   color: white;
   border: none;
@@ -172,7 +186,7 @@ canvas {
 
 .body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .main-form {
@@ -334,7 +348,6 @@ canvas {
   .option p {
     font-size: 21px;
   }
-
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {

@@ -2,11 +2,15 @@ import json
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 
-data={'type':'init','cood':[],'chat':[],'text':"",'lang':""}
+rooms={}
 
 class SketchConsumer(WebsocketConsumer):
     def connect(self):
-        self.room_group_name = 'sketch'
+        self.room_group_name = self.scope['url_route']['kwargs']['room']
+
+        if self.room_group_name not in rooms.keys():
+            rooms[self.room_group_name] = {'owner': self.scope['user'].username,
+                                           'type': 'init', 'cood': [], 'chat': [], 'text': "", 'lang': ""}
 
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
@@ -15,12 +19,12 @@ class SketchConsumer(WebsocketConsumer):
 
         self.accept()
 
-        self.send(text_data=json.dumps(data))
+        self.send(text_data=json.dumps(rooms[self.room_group_name]))
 
     def receive(self, text_data):
         rdata=json.loads(text_data)
         if(rdata['type']=='draw'):
-            data['cood'].append(rdata)
+            rooms[self.room_group_name]['cood'].append(rdata)
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
@@ -31,7 +35,7 @@ class SketchConsumer(WebsocketConsumer):
             )
         if(rdata['type']=='chat'):
             rdata['user'] = self.scope['user'].username
-            data['chat'].append(rdata)
+            rooms[self.room_group_name]['chat'].append(rdata)
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
@@ -41,7 +45,7 @@ class SketchConsumer(WebsocketConsumer):
                 }
             )
         if(rdata['type']=='edit'):
-            data['text']=rdata
+            rooms[self.room_group_name]['text'] = rdata
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
@@ -51,7 +55,7 @@ class SketchConsumer(WebsocketConsumer):
                 }
             )
         if(rdata['type']=='lang-change'):
-            data['lang']=rdata
+            rooms[self.room_group_name]['lang'] = rdata
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
@@ -61,13 +65,22 @@ class SketchConsumer(WebsocketConsumer):
                 }
             )
         if(rdata['type']=='clear'):
-            data['cood']=[]
+            rooms[self.room_group_name]['cood'] = []
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
                     'type': 'clear_message',
                     'data': text_data,
                     'user': self.scope["user"]
+                }
+            )
+        if(rdata['type']=='end'):
+            if self.scope['user'].username == rooms[self.room_group_name]['owner']:
+                del rooms[self.room_group_name]
+            async_to_sync(self.channel_layer.group_send)(
+                self.room_group_name,
+                {
+                    'type': 'del_message',
                 }
             )
     
@@ -90,3 +103,6 @@ class SketchConsumer(WebsocketConsumer):
     def clear_message(self, event):
         if self.scope["user"] != event['user']:
             self.send(text_data=event['data'])
+
+    def del_message(self, event):
+        self.send(text_data=json.dumps({'type': 'room deleted'}))

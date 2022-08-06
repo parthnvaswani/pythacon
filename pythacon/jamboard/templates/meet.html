@@ -1,0 +1,37 @@
+{% extends 'index.html' %} 
+{% load static %}
+{% block title %}Generate Meet | {% endblock %} 
+{% block content %}
+<div class="main-form">
+	<div class="form">
+	    <h2>CHALK & DUSTER</h2>
+         
+	    <div class="form1">
+	    	 
+		    <div class="email">
+		    	<div class="icon">
+		    		<span class="fa fa-users"></span>
+		    	</div>
+		    	<div class="text">
+		    		 <input type="text" placeholder="Enter Room Code" id="roomimp" required>
+		    	</div>  
+		    </div>
+		    <br/>
+		    <button class="btn" onclick="join()">Join</button>
+		    
+		    <div class="forgot">
+		    	<a href="genrand/">Create Room ?</a>
+		    </div>
+		    
+	    </div>
+    </div>
+</div> 
+
+<script>
+    function join(){
+        let room = document.querySelector("#roomimp").value;
+        window.location.href = room;
+    }
+</script>
+
+{% endblock %}
