@@ -6,7 +6,7 @@
 2) pip install channels
 3) cd pythacon
 4) python manage.py runserver 0.0.0.0:8000
-5} turn off firewall if you want to access it from other device
+5) turn off firewall if you want to access it from other device
 
 ## Admin credentials:
 
